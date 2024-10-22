@@ -1,0 +1,35 @@
+version: '3'
+
+networks:
+  image_ros-network:
+    external: true
+
+services:
+  demo_chairs:
+    image: ros:humble-ros-base
+    container_name: ros_test
+    hostname: IK-21310-1079
+    network_mode: host
+    privileged: true
+    runtime: nvidia
+    environment:
+      - DISPLAY=$DISPLAY
+      - NVIDIA_VISIBLE_DEVICES=all
+    volumes:
+      - /dev:/dev
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    device_cgroup_rules:
+      - "c 81:* rmw"
+      - "c 189:* rmw"
+    command: >
+      bash -c 'tail -F anything'
+
+    stdin_open: true
+    tty: true
+    # networks:
+    #   - image_ros-network
+
+# sudo docker exec -it demo_chairs bash
+# docker commit 1d99cd9973a3 aiprism/demo_chairs:dev13
+      # bash -c 'source /opt/ros/$${ROS_DISTRO}/setup.bash && \
+      #         tail -F anything'
