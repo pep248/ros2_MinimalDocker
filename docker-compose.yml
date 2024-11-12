@@ -7,10 +7,12 @@ services:
     image: docker_minimal_example:ros_talker_listener
     container_name: ros_talker_image
     privileged: true
+    # network_mode: host
     runtime: nvidia
     environment:
       - DISPLAY=$DISPLAY
       - NVIDIA_VISIBLE_DEVICES=all
+      - ROS_DOMAIN_ID=0
     volumes:
       - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix
@@ -29,10 +31,12 @@ services:
     image: docker_minimal_example:ros_talker_listener
     container_name: ros_listenner_image
     privileged: true
+    # network_mode: host
     runtime: nvidia
     environment:
       - DISPLAY=$DISPLAY
       - NVIDIA_VISIBLE_DEVICES=all
+      - ROS_DOMAIN_ID=0
     volumes:
       - /dev:/dev
       - /tmp/.X11-unix:/tmp/.X11-unix
