@@ -17,6 +17,12 @@ docker pull <image_repo:image_tag>
 # build a docker image out of a docker file
 docker build -f <Dockerfile> -t <image_repo:image_tag> .
 
+# log in to the docker hub repo
+docker login --username=<user> --password-stdin
+
+# push an image to the online rep (default docker_hub)
+docker push <image_repo:image_tag>
+
 # remove an image
 docker rmi <image_repo:image_tag> bash
 
@@ -36,6 +42,9 @@ docker run -it --rm --name <container_name> <image_repo:image_tag> bash
 
 # attach to a running container
 sudo docker exec -it <container_name> bash
+
+# commit the current state of a container to a new image
+docker commit <container_name> <image_repo:new_image_tag>
 
 # remove a container
 docker rm <container_name>
